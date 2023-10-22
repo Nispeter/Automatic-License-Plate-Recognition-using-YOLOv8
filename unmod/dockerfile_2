@@ -1,0 +1,19 @@
+FROM continuumio/miniconda3
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y libgl1-mesa-glx build-essential
+COPY sort sort/
+
+COPY . .
+
+RUN conda create --prefix ./env python==3.8 -y
+RUN /bin/bash -c "source activate ./env && \
+                  pip install numpy==1.24.3"
+RUN /bin/bash -c "source activate ./env && \
+                  pip install -r requirements.txt"
+RUN /bin/bash -c "source activate ./env && python main.py"
+RUN /bin/bash -c "source activate ./env && python add_missing_data.py"
+RUN /bin/bash -c "source activate ./env && python visualize.py"
+
+
+CMD [ "/bin/bash", "-c", "source activate ./env && python main.py && python add_missing_data.py && python visualize.py"]
