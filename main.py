@@ -107,21 +107,12 @@ def detect_license_plate():
 
     return jsonify(response_data)
 
-
-
-def listen_continuously():
-    while True:
-        print("waiting...")
-        time.sleep(2)
-
 if __name__ == '__main__':
     # Load models
     coco_model = YOLO('yolov8n.pt')
     license_plate_detector = YOLO('license_plate_detector.pt')
     
     # Start the continuous listening function in a separate thread
-    listen_thread = Thread(target=listen_continuously)
-    listen_thread.start()
 
     # Run Flask server
     app.run(debug=True, port=5000)
