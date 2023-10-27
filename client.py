@@ -5,7 +5,7 @@ url = "http://127.0.0.1:5000/detect_license_plate"
 
 # Loop to send 6 placeholder images
 for i in range(6):
-    image_filename = f"sample_frame_{i+1}.png"  # Adjust this to point to your actual images
+    image_filename = f"./images/sample_frame_{i+1}.png"  # Adjust this to point to your actual images
     with open(image_filename, 'rb') as image_file:
         response = requests.post(url, files={"image": image_file})
     
