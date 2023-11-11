@@ -15,14 +15,14 @@ else:
         success, frame = video.read()
         if not success:
             break
-        if frame_count % 60 == 0: #fps del video original 
+        if frame_count % 30 == 0: #fps del video original 
             frame_filename = f"./images/toSend/frame_{frame_count}.png"
             cv2.imwrite(frame_filename, frame)
 
             with open(frame_filename, 'rb') as image_file:
                 response = requests.post(url, files={"image": image_file})
             print(f"Sent frame {frame_count}. Server response:", response.json())
-            time.sleep(1)
+            time.sleep(0.5)
         frame_count += 1
 
     video.release()
