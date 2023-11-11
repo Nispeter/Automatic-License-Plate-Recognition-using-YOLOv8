@@ -8,15 +8,12 @@ import util
 from sort.sort import *
 from util import get_car, read_license_plate, write_csv
 
-
-
 def process_frames(frames):
     results = {}
     frame_nmr = -1
     mot_tracker = Sort()
 
     vehicles = [2, 3, 5, 7]
-
     for frame in frames:
         frame_nmr += 1
         results[frame_nmr] = {}
